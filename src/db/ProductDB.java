@@ -1,9 +1,9 @@
 package db;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import business.Product;
-
 
 public class ProductDB {
 
@@ -24,6 +24,22 @@ public class ProductDB {
 			em.persist(p);
 			em.getTransaction().commit();
 			return true;
+		} finally {
+			em.close();
+		}
+	}
+	
+	public static void deleteProduct(int id) {
+		Product prod = getProductById(id);
+		EntityManager em = DBUtil.getEmFactory().createEntityManager();
+		EntityTransaction et = em.getTransaction();
+		try {
+			et.begin();
+			em.remove(em.merge(prod));
+			et.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			et.rollback();
 		} finally {
 			em.close();
 		}

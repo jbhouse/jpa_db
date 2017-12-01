@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import business.User;
@@ -21,13 +22,13 @@ public class UserDB {
 	}
 	
 	
-	public static boolean addUser(User u) {
+	public static User addUser(User u) {
 		EntityManager em = DBUtil.getEmFactory().createEntityManager();
 		em.getTransaction().begin();
 		try {
 			em.persist(u);
 			em.getTransaction().commit();
-			return true;
+			return u;
 		} finally {
 			em.close();
 		}
@@ -88,6 +89,24 @@ public class UserDB {
 		} finally {
 			em.close();
 		}
+	}
+	
+	public User authenticateUser(String userName, String password) {
+		User usr = null;
+		EntityManager em = DBUtil.getEmFactory().createEntityManager();
+		String jpql = "Select u from User u where u.userName = :uname and u.passsword = :pword";
+		TypedQuery<User> tq = em.createQuery(jpql, User.class);
+		tq.setParameter("uname", userName);
+		tq.setParameter("pword", password);
+		try {
+			usr = tq.getSingleResult();
+		} catch (NoResultException e) {
+			System.out.println("Either username or password is invalid.");
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+		return usr;
 	}
 	
 }

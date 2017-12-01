@@ -3,6 +3,7 @@ package db;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import business.Vendor;
@@ -36,6 +37,22 @@ public class VendorDB {
 			em.persist(v);
 			em.getTransaction().commit();
 			return true;
+		} finally {
+			em.close();
+		}
+	}
+	
+	public static void deleteVendor(int id) {
+		Vendor vendr = getVendorById(id);
+		EntityManager em = DBUtil.getEmFactory().createEntityManager();
+		EntityTransaction et = em.getTransaction();
+		try {
+			et.begin();
+			em.remove(em.merge(vendr));
+			et.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			et.rollback();
 		} finally {
 			em.close();
 		}

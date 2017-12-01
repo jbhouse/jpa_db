@@ -31,24 +31,24 @@ public class ui {
 			System.out.println(v.getAddress()+" "+v.getCity()+" "+v.getState());
 		}
 		
-		Vendor nv = new Vendor();
-		nv.setAddress(Console.getString("address for new vendor: "));
-		nv.setCity(Console.getString("city for new vendor: "));
-		nv.setCode(Console.getString("code for new vendor: "));
-		nv.setEmail(Console.getString("email for new vendor: "));
-		nv.setIsActive(true);
-		nv.setIsPreApproved(false);
-		nv.setName(Console.getString("name for new vendor: "));
-		nv.setPhone(Console.getString("phone for new vendor: "));
-		nv.setState(Console.getString("state for new vendor: "));
-		nv.setUpDatedByUser(u.getId());
-		nv.setZip(Console.getString("zip code for new vendor: "));
-		
-		VendorDB.addVendor(nv);
-		System.out.println();
-		for(Vendor v : VendorDB.getAllVendors()) {
-			System.out.println(v.getAddress()+" "+v.getCity()+" "+v.getState());
-		}
+//		Vendor nv = new Vendor();
+//		nv.setAddress(Console.getString("address for new vendor: "));
+//		nv.setCity(Console.getString("city for new vendor: "));
+//		nv.setCode(Console.getString("code for new vendor: "));
+//		nv.setEmail(Console.getString("email for new vendor: "));
+//		nv.setIsActive(true);
+//		nv.setIsPreApproved(false);
+//		nv.setName(Console.getString("name for new vendor: "));
+//		nv.setPhone(Console.getString("phone for new vendor: "));
+//		nv.setState(Console.getString("state for new vendor: "));
+//		nv.setUpDatedByUser(u.getId());
+//		nv.setZip(Console.getString("zip code for new vendor: "));
+//		
+//		VendorDB.addVendor(nv);
+//		System.out.println();
+//		for(Vendor v : VendorDB.getAllVendors()) {
+//			System.out.println(v.getAddress()+" "+v.getCity()+" "+v.getState());
+//		}
 		
 		int vendorId  = Console.getInt("\nVendor to retrieve by id: ");
 		Vendor v = VendorDB.getVendorById(vendorId);
@@ -90,10 +90,10 @@ public class ui {
 		u.setIsActive(true);
 		u.setDateCreated(new Timestamp(System.currentTimeMillis()));
 		u.setDateUpdated(new Timestamp(System.currentTimeMillis()));
-		if (UserDB.addUser(u)) {
-			System.out.println("added the user successfully");
-		}
+		User usr = UserDB.addUser(u);
+		
 		System.out.println();
+		System.out.println(usr.getId());
 	}
 	
 	private static void printUsers() {
