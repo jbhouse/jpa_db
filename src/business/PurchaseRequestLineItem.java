@@ -75,4 +75,12 @@ public class PurchaseRequestLineItem implements Serializable {
 		UpdatedByUser = updatedByUser;
 	}
 
+	@Override
+	public String toString() {
+		return "PurchaseRequestLineItem [id=" + id
+				+ ", Quantity=" + Quantity + ", IsActive=" + IsActive + ", UpdatedByUser=" + UpdatedByUser + "]";
+	}
+	
+	
+
 }

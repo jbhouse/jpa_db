@@ -128,4 +128,14 @@ public class PurchaseRequest implements Serializable {
 		SubmittedDate = Date.valueOf(LocalDate.now());
 	}
 
+	@Override
+	public String toString() {
+		return "PurchaseRequest [id=" + id
+				+ ", Description=" + Description + ", Justification=" + Justification + ", DeliveryMode=" + DeliveryMode
+				+ ", ReasonForRejection=" + ReasonForRejection + ", DateNeeded=" + DateNeeded + ", SubmittedDate="
+				+ SubmittedDate + ", IsActive=" + IsActive + "]";
+	}
+
+	
+	
 }

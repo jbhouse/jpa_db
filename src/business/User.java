@@ -159,4 +159,15 @@ public class User implements Serializable {
 		this.Email = Console.getString("Enter your email address: ");
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", UserName=" + UserName + ", Password="
+				+ Password + ", FirstName=" + FirstName + ", LastName=" + LastName + ", Phone=" + Phone + ", Email="
+				+ Email + ", IsReviewer=" + IsReviewer + ", IsAdmin=" + IsAdmin + ", IsActive=" + IsActive
+				+ ", DateCreated=" + DateCreated + ", DateUpdated=" + DateUpdated + ", UpdatedByUser=" + UpdatedByUser
+				+ "]";
+	}
+	
+	
+
 }

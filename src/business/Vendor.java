@@ -142,4 +142,14 @@ public class Vendor implements Serializable {
 		UpDatedByUser = upDatedByUser;
 	}
 
+	@Override
+	public String toString() {
+		return "Vendor [id=" + id + ", code=" + code + ", Name=" + Name + ", Address="
+				+ Address + ", City=" + City + ", State=" + State + ", Zip=" + Zip + ", Phone=" + Phone + ", Email="
+				+ Email + ", IsPreApproved=" + IsPreApproved + ", IsActive=" + IsActive + ", UpDatedByUser="
+				+ UpDatedByUser + "]";
+	}
+
+	
+	
 }

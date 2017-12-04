@@ -20,20 +20,20 @@ public class ui {
 		printUsers();
 		
 		User u = UserDB.getUserById(Console.getInt("user id to retrieve: "));
-		System.out.println("User details: "+u.getUserName()+" "+u.getEmail()+" "+u.getFirstName()+" "+u.getLastName()+" "+u.getPhone()+" "+u.getDateCreated());
+		System.out.println("User details: "+u);
 		
 		System.out.println("purchase requests for this user");
 		for(PurchaseRequest pr : u.getpurchaserequests()) {
-			System.out.println("id: "+pr.getId()+" description: "+pr.getDescription());
+			System.out.println(pr);
 			for(PurchaseRequestLineItem prli: pr.getlineItems()) {
-				System.out.println("\t"+prli.getProduct().getName());
+				System.out.println("\t"+prli.getProduct()+" quantity: "+prli.getQuantity());
 			}
 		}
 		
 		System.out.println("\nVendors\n");
 		
 		for(Vendor v : VendorDB.getAllVendors()) {
-			System.out.println(v.getAddress()+" "+v.getCity()+" "+v.getState());
+			System.out.println(v);
 		}
 		
 		System.out.println("Let's make a new purchase request: ");
@@ -50,7 +50,7 @@ public class ui {
 		PurchaseRequestLineItem newPRLI = new PurchaseRequestLineItem();
 		newPRLI.setPurchaseRequest(purReq);
 		for(Product p : ProductDB.getAll()) {
-			System.out.println(p.getId()+" "+p.getName()+" "+p.getPrice());
+			System.out.println(p);
 		}
 		newPRLI.setProduct(ProductDB.getProductById(Console.getInt("Id of the product you want to add: ")));
 		newPRLI.setQuantity(Console.getInt("Quantity needed: "));
@@ -78,14 +78,15 @@ public class ui {
 		
 		int vendorId  = Console.getInt("\nVendor to retrieve by id: ");
 		Vendor v = VendorDB.getVendorById(vendorId);
-		System.out.println("Vendor info: "+v.getName()+" "+v.getAddress()+" "+v.getCity()+" "+v.getState());
+		System.out.println("Vendor info: "+v);
 		int prId = Console.getInt("purchase request id: ");
 		PurchaseRequest pr = PurchaseRequestDB.getPurchaseRequestById(prId);
-		System.out.println("purchase request info: "+pr.getDescription()+" "+pr.getDateNeeded()+" "+pr.getDeliveryMode()+" user who created this pr: "+pr.getUser().getFirstName()+" "+pr.getUser().getLastName()+" pr status: "+pr.getStatus().getDescription());
+		System.out.println("purchase request info: "+pr);
 		List<PurchaseRequestLineItem> prlis = pr.getlineItems();
 		for(PurchaseRequestLineItem p : prlis) {
-			System.out.println("\t"+p.getProduct().getName());
+			System.out.println("\t"+p.getProduct()+" quantity "+p.getQuantity());
 		}	
+		System.out.println("\nLet's create a new user");
 		addUser();
 		
 		UserDB.deleteUser(Console.getInt("delete a user by id: "));

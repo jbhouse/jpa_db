@@ -106,4 +106,13 @@ public class Product implements Serializable {
 		IsActive = isActive;
 	}
 
+	@Override
+	public String toString() {
+		return "Product [id=" + id
+				+ ", price=" + price + ", PartNumber=" + PartNumber + ", Name=" + Name + ", Unit=" + Unit
+				+ ", PhotoPath=" + PhotoPath + ", IsActive=" + IsActive + "]";
+	}
+
+	
+	
 }

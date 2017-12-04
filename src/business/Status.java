@@ -25,7 +25,9 @@ public class Status implements Serializable {
 //	private int urgency;
 	private int UpdatedByUser;
 
-	Status() {}
+	Status() {
+		description = "";
+	}
 	
 	public List<PurchaseRequest> getpurchaserequests(){
 		return this.purchaserequests;
@@ -58,5 +60,13 @@ public class Status implements Serializable {
 	public void setUpdatedByUser(int updatedByUser) {
 		UpdatedByUser = updatedByUser;
 	}
+
+	@Override
+	public String toString() {
+		return "Status [id=" + id + ", description=" + description
+				+ ", UpdatedByUser=" + UpdatedByUser + "]";
+	}
+	
+	
 
 }
