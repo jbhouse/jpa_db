@@ -4,13 +4,18 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import business.*;
+import db.ProductDB;
 import db.PurchaseRequestDB;
+import db.PurchaseRequestLineItemDB;
+import db.StatusDB;
 import db.UserDB;
 import db.VendorDB;
 
 public class ui {
 
 	public static void main(String[] args) {
+		
+		
 		
 		printUsers();
 		
@@ -31,6 +36,27 @@ public class ui {
 			System.out.println(v.getAddress()+" "+v.getCity()+" "+v.getState());
 		}
 		
+		System.out.println("Let's make a new purchase request: ");
+		PurchaseRequest purReq = new PurchaseRequest();
+		purReq.setUser(u);
+		purReq.setStatus(StatusDB.getStatusById(1));
+		purReq.setDescription(Console.getString("add a description: "));
+		purReq.setJustification(Console.getString("why do you need this?: "));
+		purReq.setDeliveryMode(Console.getString("delivery mode: "));
+		purReq.setDateNeeded(Console.getString("When do you need this by? (yyyy-mm-dd): "));
+		purReq.setIsActive(true);
+		PurchaseRequestDB.addPurchaseRequest(purReq);
+		
+		PurchaseRequestLineItem newPRLI = new PurchaseRequestLineItem();
+		newPRLI.setPurchaseRequest(purReq);
+		for(Product p : ProductDB.getAll()) {
+			System.out.println(p.getId()+" "+p.getName()+" "+p.getPrice());
+		}
+		newPRLI.setProduct(ProductDB.getProductById(Console.getInt("Id of the product you want to add: ")));
+		newPRLI.setQuantity(Console.getInt("Quantity needed: "));
+		newPRLI.setIsActive(true);
+		newPRLI.setUpdatedByUser(u.getId());
+		PurchaseRequestLineItemDB.addPurchaseRequestLineItem(newPRLI);
 //		Vendor nv = new Vendor();
 //		nv.setAddress(Console.getString("address for new vendor: "));
 //		nv.setCity(Console.getString("city for new vendor: "));

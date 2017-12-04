@@ -1,6 +1,8 @@
 package business;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -32,7 +34,8 @@ public class PurchaseRequest implements Serializable {
     private String Justification;
     private String DeliveryMode;
     private String ReasonForRejection;
-	private String DateNeeded;
+	private Date DateNeeded;
+	private Date SubmittedDate;
     private Boolean IsActive;
     
 	public PurchaseRequest() {}
@@ -109,12 +112,20 @@ public class PurchaseRequest implements Serializable {
 		IsActive = isActive;
 	}
 	
-    public String getDateNeeded() {
+    public Date getDateNeeded() {
 		return DateNeeded;
 	}
 
 	public void setDateNeeded(String dateNeeded) {
-		DateNeeded = dateNeeded;
+		DateNeeded = Date.valueOf(LocalDate.parse(dateNeeded));
+	}
+
+	public Date getSubmittedDate() {
+		return SubmittedDate;
+	}
+
+	public void setSubmittedDate() {
+		SubmittedDate = Date.valueOf(LocalDate.now());
 	}
 
 }

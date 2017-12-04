@@ -18,6 +18,7 @@ public class PurchaseRequestDB {
 	}
 	
 	public static boolean addPurchaseRequest(PurchaseRequest pr) {
+		pr.setSubmittedDate();
 		EntityManager em = DBUtil.getEmFactory().createEntityManager();
 		em.getTransaction().begin();
 		try {
